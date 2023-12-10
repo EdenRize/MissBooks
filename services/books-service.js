@@ -14,7 +14,6 @@ export const booksService = {
   getNextBookId,
   getFilterBy,
   setFilterBy,
-  getDefaultFilter,
 }
 
 function query() {
@@ -78,10 +77,6 @@ function setFilterBy(filterBy = {}) {
   if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
   if (filterBy.maxPrice !== undefined) gFilterBy.maxPrice = filterBy.maxPrice
   return gFilterBy
-}
-
-function getDefaultFilter() {
-  return { txt: '', maxPrice: Infinity }
 }
 
 function getNextBookId(bookId) {
