@@ -2,7 +2,7 @@ import { BookDetails } from '../pages/BookDetails.jsx'
 import { BookList } from '../cmps/BookList.jsx'
 import { BooksFilter } from '../cmps/BooksFilter.jsx'
 import {booksService} from '../services/books-service.js'
-import { AddBook } from '../cmps/AddBook.jsx'
+import { AddBookModal } from '../cmps/AddBookModal.jsx'
 
 const { useState, useEffect } = React
 
@@ -51,7 +51,7 @@ export function BookIndex() {
         <button onClick={() => setIsAddModalOpen(true)}>Add a Book</button>
         <BooksFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <BookList books={books} onSelectedBookId={onSelectedBookId} onRemoveBook={onRemoveBook} />
-        {isAddModalOpen && <AddBook onClose={() => setIsAddModalOpen(false)} onAdd={loadBooks} />}
+        {isAddModalOpen && <AddBookModal onClose={() => setIsAddModalOpen(false)} onAdd={loadBooks} />}
         </React.Fragment>
         }
         {selectedBookId && <BookDetails bookId={selectedBookId} onBack={() => setSelectedBookId(null)} />}

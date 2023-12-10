@@ -19,11 +19,11 @@ export function BookDetails({bookId, onBack}) {
         if(pageCount > 500) return '(Serious Reading)'
         else if(pageCount > 200) return '(Descent Reading)'
         else if(pageCount < 100) return '(Light Reading)'
+  
     }
 
     function getPriceClass(price) {
-        if(price > 150) return 'red'
-        else if(price < 20) return 'green'
+       return price > 150 ?  'red' : price < 20 ? 'green' : ''
     }
 
   if(!book) return <section>Loading...</section>

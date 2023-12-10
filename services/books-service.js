@@ -2,7 +2,7 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'booksDB'
-var gFilterBy = { txt: '', maxPrice: Infinity, maxPageCount: 1000 }
+var gFilterBy = { txt: '', maxPrice: Infinity, maxPageCount: Infinity }
 _initBooks()
 
 export const booksService = {

@@ -2,23 +2,19 @@ const { useState, useEffect } = React
 
 export function LongTxt({txt, length = 100}) {
     const [isShowAll, setIsShowAll] = useState(false)
-
     function getTxt() {
-        if(txt.length <= length) return <p>{txt}</p>
+        if(!isLongText() || isShowAll) return txt
+        return `${txt.substring(0, length)}...`
+    }
 
-        if(isShowAll){
-            return <React.Fragment>
-                    <p>{txt}</p>
-                    <a onClick={() => setIsShowAll(false)}>Read Less</a>
-                    </React.Fragment>
-        }
-        
-        return <p>{txt.substring(0, length)}... <a onClick={() => setIsShowAll(true)}>Read More</a></p>
+    function isLongText(){
+      return txt.length > length
     }
 
   return (
     <section className="long-txt">
-        {getTxt()}
+        <p>{getTxt()} {(isLongText() && !isShowAll) && <a onClick={() => setIsShowAll(!isShowAll)}>Read more</a>}</p>
+      {(isLongText() && isShowAll) && <a onClick={() => setIsShowAll(!isShowAll)}>Read less</a>}
     </section>
   )
 }

@@ -45,7 +45,7 @@ export function BooksFilter({ filterBy, onSetFilter }) {
             <label htmlFor="maxPrice">maxPrice: </label>
             <input value={maxPrice || ''} onChange={handleChange} type="number" id="maxPrice" name="maxPrice" />
 
-            <label htmlFor="maxPrice">maxPageCount: </label>
+            <label htmlFor="maxPageCount">maxPageCount: </label>
             <input title={maxPageCount} value={maxPageCount || ''} onChange={handleChange} type="range" id="maxPageCount" name="maxPageCount" min={0} max={1000} />
 
             <button>Submit</button>
