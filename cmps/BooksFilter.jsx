@@ -34,7 +34,7 @@ export function BooksFilter({ filterBy, onSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
-    const { txt, maxPrice } = filterByToEdit
+    const { txt, maxPrice, maxPageCount } = filterByToEdit
   return (
     <section className="books-filter">
         <h2>Filter Our Books</h2>
@@ -44,6 +44,9 @@ export function BooksFilter({ filterBy, onSetFilter }) {
 
             <label htmlFor="maxPrice">maxPrice: </label>
             <input value={maxPrice || ''} onChange={handleChange} type="number" id="maxPrice" name="maxPrice" />
+
+            <label htmlFor="maxPrice">maxPageCount: </label>
+            <input title={maxPageCount} value={maxPageCount || ''} onChange={handleChange} type="range" id="maxPageCount" name="maxPageCount" min={0} max={1000} />
 
             <button>Submit</button>
         </form>

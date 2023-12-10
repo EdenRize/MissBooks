@@ -2,7 +2,7 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'booksDB'
-var gFilterBy = { txt: '', maxPrice: Infinity }
+var gFilterBy = { txt: '', maxPrice: Infinity, maxPageCount: 1000 }
 _initBooks()
 
 export const booksService = {
@@ -26,6 +26,9 @@ function query() {
       books = books.filter(
         (book) => book.listPrice.amount <= gFilterBy.maxPrice
       )
+    }
+    if (gFilterBy.maxPageCount) {
+      books = books.filter((book) => book.pageCount <= gFilterBy.maxPageCount)
     }
     return books
   })
@@ -76,6 +79,8 @@ function getFilterBy() {
 function setFilterBy(filterBy = {}) {
   if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
   if (filterBy.maxPrice !== undefined) gFilterBy.maxPrice = filterBy.maxPrice
+  if (filterBy.maxPageCount !== undefined)
+    gFilterBy.maxPageCount = filterBy.maxPageCount
   return gFilterBy
 }
 
