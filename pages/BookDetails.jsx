@@ -1,3 +1,4 @@
+import { LongTxt } from '../cmps/LongText.jsx'
 import {booksService} from '../services/books-service.js'
 
 const { useState, useEffect } = React
@@ -43,6 +44,7 @@ export function BookDetails({bookId, onBack}) {
         </p>
         {book.listPrice.isOnSale && <p>On Sale!</p>}
         <p>Page Count: {book.pageCount} {getPageCountDesc(book.pageCount)}</p>
+        <LongTxt txt={book.description} />
 
         <img className='book-img' src={book.thumbnail}/>
 
