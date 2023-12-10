@@ -16,3 +16,9 @@
   padding: 1em;
   margin: auto;
 }
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}

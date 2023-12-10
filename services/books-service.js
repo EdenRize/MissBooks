@@ -11,9 +11,10 @@ export const booksService = {
   remove,
   save,
   getEmptyBook,
-  getNextCarId: getNextBookId,
+  getNextBookId,
   getFilterBy,
   setFilterBy,
+  getDefaultFilter,
 }
 
 function query() {
@@ -23,7 +24,9 @@ function query() {
       books = books.filter((book) => regex.test(book.title))
     }
     if (gFilterBy.maxPrice) {
-      books = books.filter((book) => book.listPrice.amout <= gFilterBy.maxPrice)
+      books = books.filter(
+        (book) => book.listPrice.amount <= gFilterBy.maxPrice
+      )
     }
     return books
   })
@@ -77,6 +80,10 @@ function setFilterBy(filterBy = {}) {
   return gFilterBy
 }
 
+function getDefaultFilter() {
+  return { txt: '', maxPrice: Infinity }
+}
+
 function getNextBookId(bookId) {
   return storageService.query(BOOK_KEY).then((books) => {
     let nextBookIdx = books.findIndex((book) => book.id === bookId) + 1
@@ -87,16 +94,13 @@ function getNextBookId(bookId) {
 
 function _initBooks() {
   let books = utilService.loadFromStorage(BOOK_KEY)
-  console.log('books', books)
   if (!books || !books.length) {
-    books = []
-    books.push(_createBooks())
-    utilService.saveToStorage(BOOK_KEY, books)
+    utilService.saveToStorage(BOOK_KEY, _createBooks())
   }
 }
 
 function _createBooks() {
-  return (books = [
+  return [
     {
       id: 'OXeMG8wNskc',
       title: 'metus hendrerit',
@@ -463,5 +467,5 @@ function _createBooks() {
         isOnSale: true,
       },
     },
-  ])
+  ]
 }
