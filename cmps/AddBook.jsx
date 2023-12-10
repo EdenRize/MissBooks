@@ -11,7 +11,7 @@ export function AddBook({onClose, onAdd}) {
 
     function onAddBook(ev){
         ev.preventDefault()
-        booksService.save(booksService.getEmptyBook(newBookProps.title, newBookProps.price))
+        booksService.save(booksService.getEmptyBook(newBookProps.title, newBookProps.price, newBookProps.publishedDate, newBookProps.pageCount, newBookProps.language, newBookProps.isOnSale))
         .then(() => {
             onAdd()
             onClose()
@@ -62,8 +62,8 @@ export function AddBook({onClose, onAdd}) {
         <label htmlFor="language">Language: </label>
             <input value={language} onChange={handleChange} type="text" id="language" name="language" />
 
-        <label htmlFor="isOnSale">Is On Sale: </label>
-            <input value={isOnSale} onChange={handleChange} type="checkbox" id="isOnSale" name="isOnSale" />
+        <label htmlFor="isOnSale">Is On Sale:  <input value={isOnSale} onChange={handleChange} type="checkbox" id="isOnSale" name="isOnSale" /> </label>
+           
 
         <button formAction='submit'>Add Book</button>
         </form>
