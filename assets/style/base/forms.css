@@ -1,18 +1,14 @@
 button {
-    cursor: pointer;
-    background-color: var(--clr2bg);
-    margin: 0.5em;
-    border: 0;
-    padding: 0.5em 0.8em;
-    border-radius: 4px;   
+  cursor: pointer;
+  margin: 0.5em;
+  border: 0;
+  padding: 0.5em 0.8em;
+  border-radius: 4px;
+  color: white;
+  background-color: var(--brown);
 }
 
 button:hover {
-    background-color: var(--clr2);
-    color: white;
-    transition: .3s;
-}
-input:focus {
-    background-color: var(--clr1bg);
-    transition: background-color 1s;
+  filter: brightness(85%);
+  transition: 0.2s;
 }

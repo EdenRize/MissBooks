@@ -1,0 +1,31 @@
+.add-book {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 80px;
+  right: 0;
+  padding: 20px;
+  background-color: var(--dark-green);
+}
+
+.add-book form {
+  display: flex;
+  flex-direction: column;
+  color: var(--off-white);
+}
+
+.add-book form input {
+  margin-block-end: 20px;
+}
+
+.add-book img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  cursor: pointer;
+}
+
+.add-book img:hover {
+  filter: brightness(80%);
+}
