@@ -50,7 +50,14 @@ function save(book) {
   }
 }
 
-function getEmptyBook(title = '', price = utilService.getRandomInt(80, 500)) {
+function getEmptyBook(
+  title = '',
+  price = utilService.getRandomInt(80, 500),
+  publishedDate = utilService.getRandomInt(1950, 2024),
+  pageCount = utilService.getRandomInt(20, 1000),
+  language = 'en',
+  isOnSale = Math.random() > 0.7
+) {
   const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
 
   return {
@@ -58,16 +65,16 @@ function getEmptyBook(title = '', price = utilService.getRandomInt(80, 500)) {
     title,
     subtitle: utilService.makeLorem(8),
     authors: [utilService.makeLorem(2)],
-    publishedDate: utilService.getRandomInt(1950, 2024),
+    publishedDate,
     description: utilService.makeLorem(15),
-    pageCount: utilService.getRandomInt(20, 1000),
+    pageCount,
     categories: [ctgs[utilService.getRandomInt(0, ctgs.length)]],
     thumbnail: `./assets/img/${utilService.getRandomInt(1, 21)}.jpg`,
-    language: 'en',
+    language,
     listPrice: {
       amount: price,
       currencyCode: 'EUR',
-      isOnSale: Math.random() > 0.7,
+      isOnSale,
     },
   }
 }
