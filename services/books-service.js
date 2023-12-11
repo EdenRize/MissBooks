@@ -2,7 +2,6 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'booksDB'
-var gFilterBy = { txt: '', maxPrice: Infinity, maxPageCount: Infinity }
 _initBooks()
 
 export const booksService = {
@@ -12,23 +11,21 @@ export const booksService = {
   save,
   getEmptyBook,
   getNextBookId,
-  getFilterBy,
-  setFilterBy,
+  getDefaultFilter,
+  addReview,
 }
 
-function query() {
+function query(filterBy) {
   return storageService.query(BOOK_KEY).then((books) => {
-    if (gFilterBy.txt) {
-      const regex = new RegExp(gFilterBy.txt, 'i')
+    if (filterBy.txt) {
+      const regex = new RegExp(filterBy.txt, 'i')
       books = books.filter((book) => regex.test(book.title))
     }
-    if (gFilterBy.maxPrice) {
-      books = books.filter(
-        (book) => book.listPrice.amount <= gFilterBy.maxPrice
-      )
+    if (filterBy.maxPrice) {
+      books = books.filter((book) => book.listPrice.amount <= filterBy.maxPrice)
     }
-    if (gFilterBy.maxPageCount) {
-      books = books.filter((book) => book.pageCount <= gFilterBy.maxPageCount)
+    if (filterBy.maxPageCount) {
+      books = books.filter((book) => book.pageCount <= filterBy.maxPageCount)
     }
     return books
   })
@@ -79,16 +76,8 @@ function getEmptyBook(
   }
 }
 
-function getFilterBy() {
-  return { ...gFilterBy }
-}
-
-function setFilterBy(filterBy = {}) {
-  if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-  if (filterBy.maxPrice !== undefined) gFilterBy.maxPrice = filterBy.maxPrice
-  if (filterBy.maxPageCount !== undefined)
-    gFilterBy.maxPageCount = filterBy.maxPageCount
-  return gFilterBy
+function getDefaultFilter() {
+  return { txt: '', maxPrice: Infinity, maxPageCount: Infinity }
 }
 
 function getNextBookId(bookId) {
@@ -97,6 +86,16 @@ function getNextBookId(bookId) {
     if (nextBookIdx === books.length) nextBookIdx = 0
     return books[nextBookIdx].id
   })
+}
+
+function addReview(bookId, review) {
+  return get(bookId)
+    .then((book) => {
+      if (!book.reviews || !book.reviews.length) book.reviews = []
+      book.reviews.unshift(review)
+      return save(book)
+    })
+    .catch((err) => console.log('err:', err))
 }
 
 function _initBooks() {

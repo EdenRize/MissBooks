@@ -1,8 +1,10 @@
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
 
+import { AddReview } from '../cmps/AddReview.jsx'
 import { LongTxt } from '../cmps/LongText.jsx'
 import {booksService} from '../services/books-service.js'
+
 
 const { useState, useEffect } = React
 
@@ -43,6 +45,15 @@ export function BookDetails() {
        return price > 150 ?  'red' : price < 20 ? 'green' : ''
     }
 
+    function onAddReview(review){
+        booksService.addReview(book.id, review)
+            .then(book => {
+                setBook(book)
+                console.log(book);
+            })
+            .catch((err) => console.log('err:', err))
+    }
+
   if(!book) return <section>Loading...</section>
   return (
     <section className="book-details main-layout full">
@@ -64,6 +75,8 @@ export function BookDetails() {
         <LongTxt txt={book.description} />
 
         <img className='book-img' src={book.thumbnail}/>
+
+        <AddReview onAddReview={onAddReview} />
 
        <img onClick={onBack} className='back-img' src="./assets/img/back.svg"/>
     </section>

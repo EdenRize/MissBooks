@@ -11,21 +11,20 @@ const { useState, useEffect } = React
 
 export function BookIndex() {
   const [books, setBooks] = useState(null)
-  const [filterBy, setFilterBy] = useState(booksService.getFilterBy())
+  const [filterBy, setFilterBy] = useState(booksService.getDefaultFilter())
 
   useEffect(()=>{
     loadBooks()
   }, [filterBy])
 
   function loadBooks(){
-    booksService.query()
+    booksService.query(filterBy)
       .then(books => setBooks(books))
       .catch(err => console.log('err:', err))
   }
 
   function onSetFilter(filterBy) {
     setFilterBy(filterBy)
-    booksService.setFilterBy(filterBy)
   }
 
   function onRemoveBook(bookId) {

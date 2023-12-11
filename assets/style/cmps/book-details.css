@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.book-details h2 {
+.book-details h3 {
   margin-block: 0 20px;
 }
 
@@ -14,6 +14,7 @@
 .book-details .book-img {
   width: 80%;
   justify-self: center;
+  margin-block-end: 40px;
 }
 
 .book-details .back-img {
