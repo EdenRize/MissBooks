@@ -4,6 +4,8 @@ const { Link } = ReactRouterDOM
 import { BookList } from '../cmps/BookList.jsx'
 import { BooksFilter } from '../cmps/BooksFilter.jsx'
 import {booksService} from '../services/books-service.js'
+import { showSuccessMsg } from "../services/event-bus.service.js"
+
 
 const { useState, useEffect } = React
 
@@ -32,6 +34,7 @@ export function BookIndex() {
         setBooks(prevBooks => {
           return prevBooks.filter(book => book.id !== bookId)
         })
+        showSuccessMsg(`Book successfully removed! ${bookId}`)
       })
       .catch(err => console.log('err:', err))
   }

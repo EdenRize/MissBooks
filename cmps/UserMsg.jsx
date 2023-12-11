@@ -1,6 +1,6 @@
 import { eventBusService } from "../services/event-bus.service.js"
-
 const { useState, useEffect } = React
+
 export function UserMsg() {
     const [msg, setMsg] = useState(null)
 
@@ -9,7 +9,7 @@ export function UserMsg() {
             setMsg(msg)
             setTimeout(() => {
                 setMsg(null)
-            }, 1500);
+            }, 2500);
         })
     }, [])
 

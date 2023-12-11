@@ -1,5 +1,6 @@
 const { useNavigate, useParams, Link } = ReactRouterDOM
 import {booksService} from '../services/books-service.js'
+import { showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
 
@@ -22,8 +23,11 @@ export function EditBook() {
     function onSaveBook(ev){
         ev.preventDefault()
         booksService.save(bookToEdit)
-        .then(onBack)
-        
+        .then(book => {
+          onBack()
+          showSuccessMsg(`Book successfully saved! ${book.id}`)
+        })
+        .catch(err => console.log('err:', err))
     }
 
     function onBack() {
@@ -66,6 +70,7 @@ function handlePriceChange(field, value) {
     const { title, pageCount, publishedDate, language} = bookToEdit
     const price = bookToEdit.listPrice.amount
     const isOnSale = bookToEdit.listPrice.isOnSale
+    
     const inputs = [
         {
           htmlFor: 'title',
