@@ -3,8 +3,9 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 
 import { AddReview } from '../cmps/AddReview.jsx'
 import { LongTxt } from '../cmps/LongText.jsx'
-import {booksService} from '../services/books-service.js'
-
+import { ReviewList } from '../cmps/ReviewList.jsx'
+import { booksService } from '../services/books-service.js'
+import { showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
 
@@ -49,8 +50,17 @@ export function BookDetails() {
         booksService.addReview(book.id, review)
             .then(book => {
                 setBook(book)
-                console.log(book);
+                showSuccessMsg(`Review successfully added! ${book.reviews[0].id}`)
             })
+            .catch((err) => console.log('err:', err))
+    }
+
+    function onDeleteReview(reviewId) {
+        booksService.deleteReview(book.id, reviewId)
+            .then(book => {
+                setBook(book)
+                showSuccessMsg(`Review successfully removed!`)
+         })
             .catch((err) => console.log('err:', err))
     }
 
@@ -75,8 +85,8 @@ export function BookDetails() {
         <LongTxt txt={book.description} />
 
         <img className='book-img' src={book.thumbnail}/>
-
-        <AddReview onAddReview={onAddReview} />
+        <ReviewList reviews={book.reviews} onDelete={onDeleteReview} />
+        <AddReview addReview={onAddReview} />
 
        <img onClick={onBack} className='back-img' src="./assets/img/back.svg"/>
     </section>

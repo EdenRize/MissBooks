@@ -1,8 +1,8 @@
+import { booksService } from '../services/books-service.js'
 const { useState, useEffect } = React
-import { utilService } from '../services/util.service.js'
 
-export function AddReview({ onAddReview}) {
-    const [review, setReview] = useState({fullName: '', rating: 5, readAt: utilService.formatDate(new Date())})
+export function AddReview({ addReview }) {
+    const [review, setReview] = useState(booksService.getEmptyReview())
 
     function handleInputChange({ target }) {
         const field = target.name
@@ -25,12 +25,18 @@ export function AddReview({ onAddReview}) {
         setReview(prevReview => ({ ...prevReview, [field]: value }))
     }
 
+    function onAddReview(ev) {
+        ev.preventDefault()
+        addReview(review)
+        setReview(booksService.getEmptyReview())
+    }
+
   const {fullName, rating, readAt} = review
   return (
     <section className="add-review">
         <h2>Add a Book Review</h2>
 
-        <form onSubmit={event => { event.preventDefault(); onAddReview(review)}}>
+        <form onSubmit={onAddReview}>
             <label>Full Name: <input required onChange={handleInputChange} value={fullName} name='fullName' type="text" placeholder="Full Name" /></label>
             <label>Rating: <input onChange={handleInputChange} value={rating} name='rating' title="" type="range" min="0" max="5" /></label>
             <label>Read At: <input required onChange={handleInputChange} value={readAt} name='readAt' type="date" /></label>
