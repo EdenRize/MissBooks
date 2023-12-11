@@ -44,11 +44,11 @@ export function BookIndex() {
 
   if (!books) return <div>Loading...</div>
   return (
-    <section className="book-index">
+    <section className="book-index main-layout full">
         {!selectedBookId &&
         <React.Fragment>
         <h1>Books</h1>
-        <button onClick={() => setIsAddModalOpen(true)}>Add a Book</button>
+        <button className='add-book-btn' onClick={() => setIsAddModalOpen(true)}>Add a Book</button>
         <BooksFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <BookList books={books} onSelectedBookId={onSelectedBookId} onRemoveBook={onRemoveBook} />
         {isAddModalOpen && <AddBookModal onClose={() => setIsAddModalOpen(false)} onAdd={loadBooks} />}

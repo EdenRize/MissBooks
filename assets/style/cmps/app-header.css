@@ -1,7 +1,11 @@
 .app-header {
   background-color: var(--dark-green);
   color: var(--off-white);
-  padding: 1em;
+  padding-block: 1em;
+}
+
+.app-header h1 {
+  margin: 0;
 }
 
 .app-header section:first-child {

@@ -28,13 +28,13 @@ export function BookDetails({bookId, onBack}) {
 
   if(!book) return <section>Loading...</section>
   return (
-    <section className="book-details">
+    <section className="book-details main-layout full">
         <h1>Title: {book.title}</h1>
-        <h2>Authors:
+        <h3>Authors:
             {book.authors.map((author, idx) => {
                return <span key={idx}>{author}</span>
             })}
-        </h2>
+        </h3>
         <p>Published At: {book.publishedDate} ({getYearDesc(book.publishedDate)})</p>
         <p>Price: <span className={getPriceClass(book.listPrice.amount)}> {new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -48,7 +48,7 @@ export function BookDetails({bookId, onBack}) {
 
         <img className='book-img' src={book.thumbnail}/>
 
-    <button onClick={onBack}>Go Back</button>
+       <img onClick={onBack} className='back-img' src="./assets/img/back.svg"/>
     </section>
   )
 }

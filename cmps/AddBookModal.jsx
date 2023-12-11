@@ -90,12 +90,16 @@ export function AddBookModal({onClose, onAdd}) {
       ]
 
   return (
-    <section className="add-book">
+    <section className="add-book-modal">
+      <div onClick={onClose} className="black-screen"></div>
+
+      <div onClick={(event) => event.stopPropagation()} className="add-book-modal-container">
+        <h2>Add a Book</h2>
         <form onSubmit={onAddBook}>
             { inputs.map(input=> {
-                return <React.Fragment key={input.id}>
+              return <React.Fragment key={input.id}>
                     <label htmlFor={input.htmlFor}>{input.label}</label>
-                    <input max={input.max }  type={input.type} value={input.value} name={input.name} id={input.id} onChange={handleChange} />
+                    <input required max={input.max }  type={input.type} value={input.value} name={input.name} id={input.id} onChange={handleChange} />
                 </React.Fragment>
             })}
 
@@ -105,6 +109,7 @@ export function AddBookModal({onClose, onAdd}) {
         <button>Add Book</button>
         </form>
         <img onClick={onClose} src="../assets/img/close.svg"/>
+            </div>
     </section>
   )
 }

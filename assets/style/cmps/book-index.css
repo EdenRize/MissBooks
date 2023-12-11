@@ -1,0 +1,10 @@
+.book-index {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
+.book-index .add-book-btn {
+  width: fit-content;
+  margin-inline: auto;
+}
