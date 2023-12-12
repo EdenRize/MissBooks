@@ -16,6 +16,7 @@ export const booksService = {
   getEmptyReview,
   deleteReview,
   getPrevBookId,
+  addGoogleBook,
 }
 
 function query(filterBy) {
@@ -52,7 +53,7 @@ function save(book) {
 
 function getEmptyBook(
   title = '',
-  price = utilService.getRandomInt(80, 500),
+  price = utilService.getRandomInt(20, 200),
   publishedDate = utilService.getRandomInt(1950, 2024),
   pageCount = utilService.getRandomInt(20, 1000),
   language = 'en',
@@ -124,6 +125,39 @@ function deleteReview(bookId, reviewId) {
 
 function getEmptyReview() {
   return { fullName: '', rating: 5, readAt: utilService.formatDate(new Date()) }
+}
+
+function addGoogleBook(googleBook) {
+  console.log('googleBook.id', googleBook.id)
+  return get(googleBook.id)
+    .then((book) => {
+      console.log('book', book)
+      return Promise.resolve('Book Already Exists')
+    })
+    .catch((err) => {
+      console.log('err', err)
+      const book = getEmptyBook(
+        googleBook.volumeInfo.title,
+        undefined,
+        googleBook.volumeInfo.publishedDate,
+        googleBook.volumeInfo.pageCount,
+        googleBook.volumeInfo.language
+      )
+      book.id = googleBook.id
+      book.authors = googleBook.volumeInfo.authors
+      book.thumbnail = googleBook.volumeInfo.imageLinks.thumbnail
+      book.description = googleBook.volumeInfo.description
+      book.categories = googleBook.volumeInfo.categories
+      return postGoogleBook(BOOK_KEY, book)
+    })
+}
+
+function postGoogleBook(entityType, newEntity) {
+  return storageService.query(entityType).then((entities) => {
+    entities.unshift(newEntity)
+    localStorage.setItem(entityType, JSON.stringify(entities))
+    return newEntity
+  })
 }
 
 function _initBooks() {

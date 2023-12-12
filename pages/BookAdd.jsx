@@ -3,6 +3,7 @@ import { utilService } from "../services/util.service.js"
 import { booksService } from '../services/books-service.js'
 import { googleService } from '../services/google-service.js'
 import { BookAddList } from "../cmps/BookAddList.jsx"
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
 export function BookAdd() {
   const [userSearch, setUserSearch] = useState('')
@@ -10,26 +11,35 @@ export function BookAdd() {
   const debounceOnSearch = useRef(utilService.debounce(onGetBooks, 1500))
 
   function onUserSearch(ev) {
-    ev.preventDefault()
     const search = ev.target.value
     setUserSearch(search)
     debounceOnSearch.current(search)
   }
 
   function onGetBooks(search){
+    if(!search) return
     googleService.getGoogleBooks(search)
       .then(setBooks)
+  }
+
+  function onAddBook(book) {
+    booksService.addGoogleBook(book)
+      .then(book => {
+        if(typeof book === 'string') {
+          showErrorMsg('Book Already Exists')
+          return
+        }
+        showSuccessMsg(`Book successfully added! ${book.title}`)
+      })
+      .catch(err => showErrorMsg(err))
   }
 
   return (
     <section className="book-add main-layout">
         <h1>book add</h1>
-        <form>
         <input value={userSearch} onChange={onUserSearch} type="text" placeholder="Search" />
-        <button>Search</button>
-        </form>
 
-        {books && <BookAddList books={books} />}
+        {books && <BookAddList books={books} onAddBook={onAddBook} />}
     </section>
   )
 }
