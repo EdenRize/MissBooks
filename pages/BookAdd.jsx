@@ -17,13 +17,12 @@ export function BookAdd() {
   }
 
   function onGetBooks(search){
-    console.log('search',search)
     googleService.getGoogleBooks(search)
       .then(setBooks)
   }
 
   return (
-    <section className="book-add">
+    <section className="book-add main-layout">
         <h1>book add</h1>
         <form>
         <input value={userSearch} onChange={onUserSearch} type="text" placeholder="Search" />

@@ -6,6 +6,7 @@ export function BookAddList({books}) {
         {books.map(book => {
             return <li key={book.id}>
                 <p>{book.volumeInfo.title}</p>
+                <img src="./assets/img/add.svg"/>
             </li>
         })}
     </ul>
