@@ -2,6 +2,7 @@ const { useState, useEffect } = React
 
 export function BooksFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+    console.log('filterByToEdit',filterByToEdit)
     
     useEffect(() => {
         onSetFilter(filterByToEdit)
@@ -48,7 +49,7 @@ export function BooksFilter({ filterBy, onSetFilter }) {
             </div>
 
             <label htmlFor="maxPageCount">maxPageCount: </label>
-            <input title={maxPageCount} value={maxPageCount || ''} onChange={handleChange} type="range" id="maxPageCount" name="maxPageCount" min={0} max={1000} />
+            <input title={maxPageCount} value={maxPageCount || ''} onChange={handleChange} type="range" id="maxPageCount" name="maxPageCount" min={0} max={1500} />
 
             {/* <button>Submit</button> */}
         </form>

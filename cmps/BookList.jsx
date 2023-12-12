@@ -2,6 +2,7 @@ const { Link } = ReactRouterDOM
 import { BookPreview } from "./BookPreview.jsx"
 
 export function BookList({books, onRemoveBook}) {
+  if(!books.length) return <h2 className="no-info-msg">No books to display</h2>
   return (
     <ul className="book-list">
         {books.map(book => {

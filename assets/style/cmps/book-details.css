@@ -13,6 +13,7 @@
 
 .book-details .book-img {
   width: 80%;
+  max-width: 500px;
   justify-self: center;
   margin-block-end: 40px;
 }

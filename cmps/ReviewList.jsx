@@ -1,7 +1,7 @@
 
 export function ReviewList({ reviews, onDelete }) {
 
-    if(!reviews) return <p className="review-list">No reviews yet</p>
+    if(!reviews) return <h2 className="no-info-msg">No reviews yet...</h2>
   return (
     <table className="review-list">
         <thead>

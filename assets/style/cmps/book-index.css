@@ -1,10 +1,21 @@
 .book-index {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
+  position: relative;
+}
+
+.book-index h1 {
+  margin-block-end: 30px;
 }
 
 .book-index .add-book-btn {
-  width: fit-content;
-  margin-inline: auto;
+  position: absolute;
+  top: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--brown);
+  color: var(--off-white);
+  transition: 0.2s;
+}
+
+.book-index a:hover {
+  filter: brightness(90%);
 }

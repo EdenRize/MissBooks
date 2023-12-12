@@ -8,6 +8,8 @@ import { AppHeader } from "./cmps/AppHeader.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
 import { EditBook } from "./pages/EditBook.jsx"
 import { UserMsg } from "./cmps/UserMsg.jsx"
+import  {AboutTeam}  from "./cmps/AboutTeam.jsx"
+import  {AboutGoal}  from "./cmps/AboutGoal.jsx"
 
 
 export function App() {
@@ -23,7 +25,10 @@ export function App() {
                 <Route path="/book/:bookId" element={<BookDetails />} />
                 <Route path="/book/edit/:bookId" element={<EditBook />} />
                 <Route path="/book/edit" element={<EditBook />} />
-                <Route path="/about" element={<AboutUs />} />
+                <Route path="/about" element={<AboutUs />} >
+                    <Route path="/about/team" element={<AboutTeam />} />
+                    <Route path="/about/goal" element={<AboutGoal />} />
+                </Route>
                 </Routes>
             </main>
             <UserMsg />
