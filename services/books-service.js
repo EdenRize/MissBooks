@@ -128,7 +128,6 @@ function getEmptyReview() {
 }
 
 function addGoogleBook(googleBook) {
-  console.log('googleBook.id', googleBook.id)
   return get(googleBook.id)
     .then((book) => {
       console.log('book', book)
@@ -143,6 +142,7 @@ function addGoogleBook(googleBook) {
         googleBook.volumeInfo.pageCount,
         googleBook.volumeInfo.language
       )
+
       book.id = googleBook.id
       book.authors = googleBook.volumeInfo.authors
       book.thumbnail = googleBook.volumeInfo.imageLinks.thumbnail

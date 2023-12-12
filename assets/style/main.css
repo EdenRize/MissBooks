@@ -23,3 +23,6 @@
 @import 'cmps/book-add.css';
 @import 'cmps/book-add-list.css';
 @import 'cmps/star-rating.css';
+@import 'cmps/choose-rating.css';
+@import 'cmps/rate-by-select.css';
+@import 'cmps/rate-by-txt.css';

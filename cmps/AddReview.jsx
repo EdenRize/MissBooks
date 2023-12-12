@@ -1,9 +1,13 @@
 import { booksService } from '../services/books-service.js'
+import ChooseRating from './ChooseRating.jsx'
+import { RateBySelect } from './RateBySelect.jsx'
+import { RateByTxt } from './RateByTxt.jsx'
 import { StarRating } from './StarRating.jsx'
 const { useState } = React
 
 export function AddReview({ addReview }) {
     const [review, setReview] = useState(booksService.getEmptyReview())
+    const [reviewMethod, setReviewMethod] = useState('stars')
 
     function handleInputChange({ target }) {
         const field = target.name
@@ -33,17 +37,34 @@ export function AddReview({ addReview }) {
     }
 
   const {fullName, rating, readAt} = review
+
   return (
     <section className="add-review">
         <h2>Add a Book Review</h2>
 
         <form onSubmit={onAddReview}>
             <label>Full Name: <input required onChange={handleInputChange} value={fullName} name='fullName' type="text" placeholder="Full Name" /></label>
-            <StarRating handleChange={handleInputChange} />
-            {/* <label>Rating: <input onChange={handleInputChange} value={rating} name='rating' title={rating} type="range" min="0" max="5" /></label> */}
+            <ChooseRating reviewMethod={reviewMethod} onMethodChange={setReviewMethod} />
+            
+            <DynamicRating reviewMethod={reviewMethod} handleChange={handleInputChange} initRate={rating} />
             <label>Read At: <input required onChange={handleInputChange} value={readAt} name='readAt' type="date" /></label>
             <button>Add Review</button>
         </form>
     </section>
   )
+}
+
+
+function DynamicRating(props) {
+    switch (props.reviewMethod) {
+        case 'stars':
+            return <StarRating {...props} />
+
+        case 'select':
+            return <RateBySelect {...props} />
+
+        case 'txt':
+            return <RateByTxt {...props} />
+
+    }
 }

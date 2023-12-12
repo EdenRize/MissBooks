@@ -1,7 +1,7 @@
 const { useState } = React
 
-export function StarRating({ handleChange }) {
-  const [rating, setRating] = useState(0)
+export function StarRating({ handleChange, initRate }) {
+  const [rating, setRating] = useState(initRate)
   const [hover, setHover] = useState(0)
   return (
     <div className='star-rating'>
