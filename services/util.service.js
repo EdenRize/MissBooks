@@ -8,6 +8,7 @@ export const utilService = {
   getDayName,
   getMonthName,
   formatDate,
+  debounce,
 }
 
 function makeId(length = 6) {
@@ -110,4 +111,17 @@ function formatDate(date) {
   const formattedDate = year + '-' + month + '-' + day
 
   return formattedDate
+}
+
+function debounce(func, wait) {
+  let timeout
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout)
+      func(...args)
+    }
+
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
 }

@@ -6,6 +6,7 @@ import { AboutUs } from "./pages/AboutUs.jsx"
 import { HomePage } from "./pages/HomePage.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
 import { EditBook } from "./pages/EditBook.jsx"
+import { BookAdd } from "./pages/BookAdd.jsx"
 import { AppHeader } from "./cmps/AppHeader.jsx"
 import { UserMsg } from "./cmps/UserMsg.jsx"
 import  { AboutTeam }  from "./cmps/AboutTeam.jsx"
@@ -25,6 +26,7 @@ export function App() {
                 <Route path="/book/:bookId" element={<BookDetails />} />
                 <Route path="/book/edit/:bookId" element={<EditBook />} />
                 <Route path="/book/edit" element={<EditBook />} />
+                <Route path="/book-add" element={<BookAdd />} />
                 <Route path="/about" element={<AboutUs />} >
                     <Route path="/about/team" element={<AboutTeam />} />
                     <Route path="/about/goal" element={<AboutGoal />} />
