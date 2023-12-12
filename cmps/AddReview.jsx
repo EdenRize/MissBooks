@@ -1,5 +1,5 @@
 import { booksService } from '../services/books-service.js'
-const { useState, useEffect } = React
+const { useState } = React
 
 export function AddReview({ addReview }) {
     const [review, setReview] = useState(booksService.getEmptyReview())

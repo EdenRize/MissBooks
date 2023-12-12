@@ -11,6 +11,8 @@ const { useState, useEffect } = React
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
+    const [prevBookId, setPrevBookId] = useState(null)
+    const [nextBookId, setNextBookId] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
 
@@ -64,6 +66,14 @@ export function BookDetails() {
             .catch((err) => console.log('err:', err))
     }
 
+    if(book) {
+      booksService.getNextBookId(book.id)
+        .then(setNextBookId)
+
+      booksService.getPrevBookId(book.id)
+        .then(setPrevBookId)
+    } 
+
   if(!book) return <section>Loading...</section>
   return (
     <section className="book-details main-layout full">
@@ -87,6 +97,11 @@ export function BookDetails() {
         <img className='book-img' src={book.thumbnail}/>
         <ReviewList reviews={book.reviews} onDelete={onDeleteReview} />
         <AddReview addReview={onAddReview} />
+
+        <nav className="book-nav">
+        {prevBookId && <Link to={`/book/${prevBookId}`}>← Prev Book</Link>}
+        {nextBookId && <Link to={`/book/${nextBookId}`}>Next Book →</Link>}
+        </nav>
 
        <img onClick={onBack} className='back-img' src="./assets/img/back.svg"/>
     </section>

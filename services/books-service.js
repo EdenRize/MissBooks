@@ -15,6 +15,7 @@ export const booksService = {
   addReview,
   getEmptyReview,
   deleteReview,
+  getPrevBookId,
 }
 
 function query(filterBy) {
@@ -87,6 +88,14 @@ function getNextBookId(bookId) {
     let nextBookIdx = books.findIndex((book) => book.id === bookId) + 1
     if (nextBookIdx === books.length) nextBookIdx = 0
     return books[nextBookIdx].id
+  })
+}
+
+function getPrevBookId(bookId) {
+  return storageService.query(BOOK_KEY).then((books) => {
+    let prevBookIdx = books.findIndex((book) => book.id === bookId) - 1
+    if (prevBookIdx === -1) prevBookIdx = books.length - 1
+    return books[prevBookIdx].id
   })
 }
 
