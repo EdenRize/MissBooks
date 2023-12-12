@@ -5,12 +5,16 @@ export function UserMsg() {
     const [msg, setMsg] = useState(null)
 
     useEffect(() => {
-        eventBusService.on('show-user-msg', msg => {
+        const unsubscribe = eventBusService.on('show-user-msg', msg => {
             setMsg(msg)
             setTimeout(() => {
                 setMsg(null)
             }, 2500);
         })
+
+        return () => {
+            unsubscribe()
+        }
     }, [])
 
     if (!msg) return null
