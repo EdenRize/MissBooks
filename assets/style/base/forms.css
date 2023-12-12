@@ -1,4 +1,4 @@
-button {
+button:not(.star-rating button) {
   cursor: pointer;
   margin: 0.5em;
   border: 0;
@@ -8,7 +8,7 @@ button {
   background-color: var(--brown);
 }
 
-button:hover {
+button:not(.star-rating button):hover {
   filter: brightness(85%);
   transition: 0.2s;
 }

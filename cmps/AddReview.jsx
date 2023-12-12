@@ -1,4 +1,5 @@
 import { booksService } from '../services/books-service.js'
+import { StarRating } from './StarRating.jsx'
 const { useState } = React
 
 export function AddReview({ addReview }) {
@@ -38,7 +39,8 @@ export function AddReview({ addReview }) {
 
         <form onSubmit={onAddReview}>
             <label>Full Name: <input required onChange={handleInputChange} value={fullName} name='fullName' type="text" placeholder="Full Name" /></label>
-            <label>Rating: <input onChange={handleInputChange} value={rating} name='rating' title={rating} type="range" min="0" max="5" /></label>
+            <StarRating handleChange={handleInputChange} />
+            {/* <label>Rating: <input onChange={handleInputChange} value={rating} name='rating' title={rating} type="range" min="0" max="5" /></label> */}
             <label>Read At: <input required onChange={handleInputChange} value={readAt} name='readAt' type="date" /></label>
             <button>Add Review</button>
         </form>

@@ -19,6 +19,6 @@
   margin-block-end: 15px;
 }
 
-.add-review form button {
+.add-review form button:not(.star-rating button) {
   background-color: var(--dark-green);
 }
